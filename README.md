@@ -187,3 +187,21 @@ To reproduce:
 
 ```bash
 pip install -r requirements.txt
+
+## ⚙️ Key Dependencies and Versions
+
+This project was developed using the following core libraries:
+
+- **Python:** 3.10+
+- **NumPy:** 1.26.x
+- **pandas:** 2.2.x
+- **scikit-learn:** 1.4.x
+- **PyTorch:** 2.2.x
+- **Matplotlib:** 3.8.x
+- **SciPy:** 1.11.x
+- **tqdm:** 4.66.x
+
+These libraries support data processing, machine learning, visualization, and deep learning components of the project.
+
+👉 The full dependency list is available in `requirements.txt`.
+
