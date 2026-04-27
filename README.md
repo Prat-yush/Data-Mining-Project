@@ -184,8 +184,6 @@ Classical machine learning models perform strongly with engineered features, whi
 This project was developed in **Google Colab**.
 
 To reproduce:
-
-```bash
 pip install -r requirements.txt
 
 ## ⚙️ Key Dependencies and Versions
@@ -202,6 +200,20 @@ This project was developed using the following core libraries:
 - **tqdm:** 4.66.x
 
 These libraries support data processing, machine learning, visualization, and deep learning components of the project.
+The full dependency list is available in `requirements.txt`.
 
-👉 The full dependency list is available in `requirements.txt`.
+
+## 📊 Results Summary
+
+This project shows that early-cycle battery data contains meaningful predictive signal for estimating total cycle life.
+
+Key findings include:
+- Classical models (Random Forest) outperform simpler baselines like k-NN
+- Sequence-based modeling (LSTM) achieves the strongest overall performance
+- Increasing early-cycle window size improves performance initially, but shows diminishing returns
+
+### 🔑 Key Insight:
+Battery degradation patterns can be partially captured early in the lifecycle, but best performance is achieved when temporal structure is explicitly modeled using sequence-based approaches.
+
+
 
