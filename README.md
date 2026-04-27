@@ -11,8 +11,7 @@ We analyze the **MICH subset** of the *BatteryLife_Processed* dataset and build 
 ---
 
 ## 🎥 Project Video
-
-👉 *[Insert your project video link here]*
+https://www.youtube.com/watch?v=zmX2V_1Slzo
 
 ---
 
