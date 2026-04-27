@@ -1,130 +1,190 @@
-# 🔋 Battery Life Prediction – MICH Dataset
+# 🔋 Early Prediction of Battery Life Using Machine Learning (MICH Dataset)
 
 ## 📌 Overview
 
-This project performs Exploratory Data Analysis (EDA) and Remaining Useful Life (RUL) prediction using the **MICH subset** of the *BatteryLife_Processed* dataset.
+This project investigates the problem of **early prediction of battery cycle life** using machine learning and deep learning techniques. Battery degradation is a complex, nonlinear, and time-dependent process, making accurate lifetime estimation challenging.
 
-The goal is to analyze battery degradation behavior and build predictive models for cycle life estimation.
+The main objective of this work is to determine whether **early-cycle discharge behavior contains sufficient signal to predict total battery lifetime**, and whether **sequence-based models improve predictive performance compared to classical approaches**.
 
-**Dataset Source:**  
-Tan et al. (2025), *BatteryLife: A Comprehensive Dataset and Benchmark for Battery Life Prediction*  
-DOI: https://doi.org/10.5281/zenodo.17958489
+We analyze the **MICH subset** of the *BatteryLife_Processed* dataset and build predictive models ranging from simple baselines to LSTM-based sequence models.
 
 ---
 
-## 📂 Dataset Used
+## 🎥 Project Video
 
-- Subset: **MICH**
-- Battery files: `.pkl`
-- Life labels: `total_MICH_labels.json`
+👉 *[Insert your project video link here]*
 
-Each battery file contains:
-- Metadata (materials, voltage limits, protocols, etc.)
-- `cycle_data` (per-cycle time-series measurements)
+---
 
+## 📂 Dataset
+
+This project uses the **MICH subset** of the BatteryLife dataset:
+
+📌 **Source:**  
+Tan et al. (2025), *BatteryLife: A Comprehensive Dataset and Benchmark for Battery Life Prediction*  
+🔗 https://doi.org/10.5281/zenodo.17958489
+
+### 📁 Data Components
+
+- **Battery time-series files (`.pkl`)**
+  - Per-cycle charge/discharge measurements
+  - Includes voltage, current, and capacity signals
+- **Life labels (`total_MICH_labels.json`)**
+  - Maps each battery ID to total cycle life (target variable)
+
+### 🔧 Data Characteristics
+
+- Variable-length time-series per battery
+- Strong heterogeneity in degradation patterns
+- Significant variation in initial capacity and lifetime
+- Nonlinear capacity fade behavior
 
 ---
 
 ## 📊 Exploratory Data Analysis (EDA)
 
-The following analyses were performed:
+The dataset was analyzed to understand structural and statistical properties:
 
-- Distribution of cycle life
-- Sequence length distribution
-- Capacity degradation curves
-- Initial capacity variability
+### Key analyses:
+- Distribution of battery cycle life
+- Early-cycle capacity trends
+- Capacity degradation curves over time
+- Variability across batteries
 
-### 🔎 Key Observations
+### 🔎 Key Insights:
 
-- Significant variability in cycle life across batteries  
-- Variable-length degradation sequences  
-- Nonlinear capacity fade behavior  
-- Differences in initial capacity across cells  
+- Battery lifetimes vary significantly across samples
+- Degradation behavior is highly nonlinear
+- Early cycles show measurable but noisy predictive signals
+- Strong inter-battery variability suggests the need for robust modeling approaches
 
-These findings motivate the use of nonlinear time-series models.
+These findings motivate both **feature-based models** and **sequence-based deep learning approaches**.
 
 ---
 
 ## 🤖 Modeling Approach
 
-### 🎯 Target
-Predict **Remaining Useful Life (RUL)**.
+### 🎯 Prediction Task
+
+The goal is to predict:
+
+> **Remaining Useful Life (RUL)** or total cycle life of a battery using early-cycle information.
+
+---
 
 ### 🧠 Models Implemented
-- **Linear Regression** (baseline, interpretable)
-- **LSTM** (sequence-based deep learning model)
+
+This project evaluates multiple modeling strategies:
+
+#### 📌 Classical Machine Learning Models
+- k-Nearest Neighbors Regression (k-NN)
+- Random Forest Regression
+
+These models operate on **engineered early-cycle features** such as average discharge capacity.
+
+#### 📌 Sequence-Based Model
+- Long Short-Term Memory (LSTM) neural network
+
+The LSTM directly processes **early-cycle time-series sequences**, allowing it to capture temporal degradation dynamics.
+
+---
 
 ### ⚙️ Design Decisions
 
-- Normalize capacity by initial value  
-  → Reduces inter-battery variability  
+- Early-cycle windows used as predictive input (3, 5, 10 cycles)
+- Feature extraction from discharge capacity signals
+- Train/test split performed at battery level (to avoid leakage)
+- Evaluation metrics:
+  - Mean Absolute Error (MAE)
+  - Root Mean Squared Error (RMSE)
 
-- Split data by battery (not by cycle)  
-  → Prevents data leakage  
+---
 
-- Use MAE and RMSE for evaluation  
-  → Appropriate for continuous prediction
+## 🔬 Research Questions (Checkpoint 2)
 
-  ---
+This project is structured around three core research questions:
 
-## 🔬 Research Question Formation (Checkpoint 2)
-
-Checkpoint 2 focuses on transforming the initial exploratory findings into concrete research questions and validating the feasibility of the proposed modeling methods.
-
-### ❓ Research Questions
-
-**RQ1:**  
+### ❓ RQ1
 How accurately can early-cycle battery measurements predict total cycle life using classical regression models?
 
-**RQ2:**  
-How does the amount of early-cycle data used for prediction affect the accuracy of remaining useful life estimation?
+### ❓ RQ2
+How does increasing the amount of early-cycle data affect prediction accuracy for battery lifetime estimation?
 
-**RQ3:**  
-Do sequence-based models capture degradation patterns that improve prediction accuracy compared to classical machine learning approaches?
-
----
-
-## 🧪 Initial Method Feasibility Tests
-
-Before implementing the full modeling pipeline, small feasibility experiments were conducted to ensure that the proposed algorithms and libraries can be applied successfully to the dataset.
-
-### Feature Extraction Test
-
-A simple feature was extracted from the dataset:
-
-- **Early-cycle capacity feature:**  
-  Average discharge capacity from the first few cycles of each battery.
-
-This feature provides a simple signal representing early degradation behavior.
-
-### Baseline Algorithm Tests
-
-Two regression models were tested using the extracted feature:
-
-- **Random Forest Regression**
-- **k-Nearest Neighbor Regression**
-
-These experiments confirmed that:
-
-- Battery cycle data can be successfully processed into usable features  
-- Machine learning models can be trained on the dataset  
-- The selected Python libraries (pandas, scikit-learn) work correctly with the project data
-
-These runs serve as **method feasibility checks**, not final model evaluations.
+### ❓ RQ3
+Do sequence-based deep learning models (LSTM) outperform classical machine learning models in capturing degradation dynamics?
 
 ---
 
-## 📈 Next Steps
+## 🧪 Method Feasibility Testing
 
-Future stages of the project will extend this work by:
+Before full model development, feasibility tests were conducted to validate data usability and pipeline correctness.
 
-- Extracting richer early-cycle features from the battery time-series data
-- Training multiple regression and sequence-based models
-- Comparing classical machine learning models with deep learning approaches
-- Evaluating model performance using MAE and RMSE
+### Feature Engineering Test
+A simple early-cycle feature was constructed:
 
-The final goal is to determine which modeling strategies best capture battery degradation patterns and provide accurate predictions of battery cycle life.
+- Mean discharge capacity over initial cycles
 
+This provides a compact representation of early degradation behavior.
 
+---
 
+### Baseline Model Tests
 
+Two classical models were tested:
+
+- Random Forest Regression
+- k-Nearest Neighbor Regression
+
+### Outcomes:
+
+- Dataset successfully converted into supervised learning format
+- Models trained without preprocessing issues
+- Early-cycle features show measurable predictive signal
+
+These results confirm the **feasibility of applying machine learning techniques to the dataset**.
+
+---
+
+## 📈 Experimental Pipeline Summary
+
+The full modeling pipeline includes:
+
+1. Data loading and preprocessing
+2. Feature extraction from early-cycle signals
+3. Baseline regression modeling (k-NN, Random Forest)
+4. Sequence construction for LSTM
+5. Deep learning model training
+6. Evaluation using MAE and RMSE
+7. Comparative analysis across models
+
+---
+
+## 📊 Key Results Summary
+
+Across experiments, the following patterns were observed:
+
+- Early-cycle data contains meaningful predictive signal for battery life
+- Random Forest consistently outperforms k-NN among classical models
+- LSTM achieves the strongest performance overall by capturing temporal structure
+- Increasing early-cycle window size shows diminishing returns in predictive accuracy
+
+---
+
+## 🧠 Final Insight
+
+The results suggest that:
+
+> Battery degradation is partially predictable from early behavior, but the effectiveness of prediction depends heavily on how temporal information is modeled.
+
+Classical machine learning models perform strongly with engineered features, while sequence-based models provide additional gains by directly learning from time-series structure.
+
+---
+
+## 📦 Reproducibility
+
+This project was developed in **Google Colab**.
+
+To reproduce:
+
+```bash
+pip install -r requirements.txt
