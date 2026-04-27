@@ -10,6 +10,8 @@ We analyze the **MICH subset** of the *BatteryLife_Processed* dataset and build 
 
 ---
 
+## 👉 Start here: main_notebook.ipynb
+
 ## 🎥 Project Video
 https://www.youtube.com/watch?v=zmX2V_1Slzo
 
