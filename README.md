@@ -166,7 +166,7 @@ The full modeling pipeline includes:
 
 ---
 
-## 📊 Key Results Summary
+## 📊 Key observations
 
 Across experiments, the following patterns were observed:
 
