@@ -17,6 +17,12 @@ https://www.youtube.com/watch?v=zmX2V_1Slzo
 
 ---
 
+## Research questions
+
+- Whether early-cycle features contain enough signal to predict total cycle life  
+- How prediction accuracy changes as more early-cycle data is used  
+- Whether sequence-based models (LSTM) outperform classical machine learning models  
+
 ## 📂 Dataset
 
 This project uses the **MICH subset** of the BatteryLife dataset:
